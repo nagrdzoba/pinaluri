@@ -7,7 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import About from "./about";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setWeather } from "./redux/weatherSlice";
+
 
 function App() {
   const handleSelect = (e) => {
@@ -27,7 +27,7 @@ function App() {
   const citrus = title.slice(0, 5);
 
   const dispatch = useDispatch();
-  const weatherInKelvin = useSelector((state) => state.weather.weatherString);
+  const weatherInKelvin = useSelector((e) => e);
 
   useEffect(() => {
     const api_key = "8b4a1cfe7b37f251dcce8b232975fd6d";
@@ -36,7 +36,7 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        dispatch(setWeather(data.main.temp));
+        dispatch({type:'SET_WEATHER', payload:data.main.temp});
       });
   }, []);
 
@@ -47,7 +47,7 @@ function App() {
           <CostumLink to="/">home page </CostumLink>
         </div>
 
-        <Weather>temperature is:{weatherInKelvin} K</Weather>
+        <Weather>current weather is:{weatherInKelvin} K</Weather>
         <div>
           <CostumLink to="/about">about </CostumLink>
         </div>
@@ -68,9 +68,7 @@ function App() {
               <Dropdown.Item eventKey="Italy">Italy</Dropdown.Item>
             </DropdownButton>
             <h4>
-              {value
-                ? `You selected ${value}`
-                : "you have not selected country"}
+              {value ? `You selected ${value}` : "you have not selected country"}
             </h4>
             {citrus.map((L, index) => (
               <List key={index}> {L.name}</List>
@@ -157,8 +155,8 @@ const Lower1 = styled.div`
 `;
 const Lower2 = styled.div`
   height: 90vh;
-  background-image: url("https://atlassianblog.wpengine.com/wp-content/uploads/2017/12/screen-shot-2017-11-16-at-3.50.20-pm-1.png");
-
+  background-image: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2018/06/Error-404-on-Opera.webp");
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 `;
