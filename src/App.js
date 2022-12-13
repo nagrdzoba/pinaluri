@@ -71,16 +71,16 @@ function App() {
               {value ? `You selected ${value}` : "you have not selected country"}
             </h4>
             {citrus.map((L, index) => (
-              <List key={index}> {L.name}</List>
+              <List key={index}>  <a href={L.web_pages}>{L.name}</a></List>
             ))}
           </Lower>
         </Route>
-
-        <Route exact path="/about">
+       
+         <Route exact path="/about">
           <Lower1>
             <About />
           </Lower1>
-        </Route>
+        </Route> 
         <Route exact path="*">
           <Lower2></Lower2>
         </Route>
